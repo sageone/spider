@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+           
+    <!-- Initialal elementents -->       
+    <bean id="initElement1" class="org.nms.spider.beans.impl.GenericElement">
+    	<property name="element" value="http://localhost/test/spider"/>
+    </bean>
+    
+    
+    <!-- PREPROCESSOR CONFIGURATION -->  
+    	<!-- PER STEP CHAIN processor for preprocessor -->
+    	<bean id="preProcessorPerStepChainProcessor" class="org.nms.spider.helpers.utils.ChainedProcessorHelperImpl">
+    		<property name="processorsChain">
+    			<list>
+    				<bean id="logProcessorPerStep" class="org.nms.spider.helpers.utils.LogProcessorImpl"></bean>
+    			</list>
+    		</property>
+    	
+    	</bean>
+    	<bean id="urlProcessor" class="org.nms.spider.helpers.impl.UrlProcessorImpl">
+    	</bean>  
+  
+    	<bean id="regexProcessor1" class="org.nms.spider.helpers.impl.RegexParserPreprocessorImpl">
+    		<property name="prefix" value="http://localhost/test/spider/followlink" />
+    		<property name="postfix" value="&quot;"></property>
+    		<property name="removePostFix" value="true"></property>
+    	</bean>
+    
+    	<bean id="regexProcessor2" class="org.nms.spider.helpers.impl.RegexParserPreprocessorImpl">
+    		<property name="prefix" value="http://www.linktoshow.html" />
+    		<property name="postfix" value="&quot;"></property>
+    		<property name="removePostFix" value="true"></property>
+    	</bean>
+    	
+    	<bean id="preprocessorFilter" class="org.nms.spider.helpers.utils.FilterProcessorImpl">
+    		<property name="filter">
+    			<bean id="filter12345" class="org.nms.spider.helpers.impl.ContainsStringFilterImpl">
+    				<property name="filter" value="12345"/>
+    			</bean>
+    		</property>
+    	</bean>
+    	<bean id="modifier" class="org.nms.spider.helpers.utils.ElementModifierProcessorImpl">
+    		<property name="modifiers">
+    			<list>
+    				<bean id="replacemeModifier" class="org.nms.spider.helpers.impl.ReplaceStringModifier">
+    					<property name="toReplace" value="REPLACEME"></property>
+    					<property name="replacer" value="REPLACED!"></property>
+    				</bean>
+    				<bean id="replacemeModifier2" class="org.nms.spider.helpers.impl.ReplaceStringModifier">
+    					<property name="toReplace" value="html"></property>
+    					<property name="replacer" value="HTML"></property>
+    				</bean>
+    				<bean id="appenderModifier" class="org.nms.spider.helpers.impl.AppenderElementModifierImpl">
+    					<property name="appendString" value="APPENDED!!"></property>
+    				</bean>
+    			</list>
+    		</property>
+    	</bean>
+    <bean id="preprocessor" class="org.nms.spider.helpers.utils.ChainedProcessorHelperImpl">
+    	<property name="processorsChain">
+    		<list>
+    			<ref bean="urlProcessor"/>
+    			<ref bean="regexProcessor1"/>
+    			<ref bean="urlProcessor"/>
+    			<ref bean="regexProcessor2"/>
+    			<ref bean="preprocessorFilter"/>
+    			<ref bean="modifier"/>
+    		</list>
+    	</property>
+    	<property name="perStepChainProcessor">
+    		<ref bean="preProcessorPerStepChainProcessor"/>
+    	</property>
+    </bean>
+    
+    <!-- POSTPROCESSOR CONFIGURATION -->
+    <bean id="postprocessor" class="org.nms.spider.helpers.utils.LogProcessorImpl">
+    
+    </bean>
+    
+    
+    
+	<bean id="spider" class="org.nms.spider.engine.impl.BaseSpider">
+		<property name="preprocessor" ref="preprocessor"></property>
+		<property name="postprocessor" ref="postprocessor"></property>
+		<property name="initialSet">
+			<list>
+				<ref bean="initElement1"/>
+			</list>
+		</property>
+	</bean>
+</beans>

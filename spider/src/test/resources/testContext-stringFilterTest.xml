@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+           
+    <!-- Initial elementents -->       
+    <bean id="initElement1" class="org.nms.spider.beans.impl.GenericElement">
+   		<property name="element" value="http://www.fakku.net/"/>
+    </bean>
+   
+	<bean id="initElement2" class="org.nms.spider.beans.impl.GenericElement">
+		<property name="element" value="http://www.google.com/"/>
+	</bean>
+   
+	<bean id="elements" class="java.util.ArrayList">
+    	<constructor-arg>
+		   <list value-type="org.nms.spider.beans.IElement">
+		   		<ref bean="initElement1"/>
+		   		<ref bean="initElement2"/>
+		   </list>
+		</constructor-arg>
+   </bean>
+   <!-- Expected result : number of elements that pass the Filter -->
+   <bean id="expectedResultNum" class="java.lang.Integer">
+   	<constructor-arg value="1"></constructor-arg>
+   </bean>
+   
+   <!-- Filter to test. -->
+   <bean id="stringFilter" class="org.nms.spider.helpers.utils.FilterProcessorImpl">
+	<property name="filter">
+		<bean id="stringFilterImpl" class="org.nms.spider.helpers.impl.ContainsStringFilterImpl">
+			<property name="filter" value="fak"/>
+		</bean>
+	</property>
+   </bean>
+   
+</beans>
