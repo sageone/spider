@@ -2,17 +2,22 @@ package org.nms.spider.helpers.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.nms.spider.beans.IElement;
 import org.nms.spider.beans.impl.TypedElement;
 import org.nms.spider.helpers.IProcessorHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RegexParserPreprocessorImpl implements IProcessorHelper {
 
-	private static final Logger log = Logger.getLogger(RegexParserPreprocessorImpl.class.toString());
+	/**
+	 * Logger
+	 */
+	private static final Logger log = LoggerFactory.getLogger(RegexParserPreprocessorImpl.class);
 	
 	/**
 	 * Prefix for the link search.
