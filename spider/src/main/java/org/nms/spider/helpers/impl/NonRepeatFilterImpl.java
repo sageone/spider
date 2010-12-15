@@ -1,10 +1,15 @@
 package org.nms.spider.helpers.impl;
 
+import java.util.Collections;
+import java.util.Map;
+
 import org.nms.spider.beans.IElement;
 import org.nms.spider.helpers.IFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.apache.commons.dbcp.BasicDataSource;
 /**
  * This filter stores the ID's of elements to know if the spider has inspected the element before.
  * <p>
@@ -17,20 +22,100 @@ import org.slf4j.LoggerFactory;
  */
 public class NonRepeatFilterImpl implements IFilter {
 
+	
+	
 	/**
 	 * The logger.
 	 */
 	private final static Logger log = LoggerFactory.getLogger(NonRepeatFilterImpl.class);
 	
+	/**
+	 * The jdbc template.
+	 */
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+
+	
+	private String tableName;
+	
+	private String idTableColumnName;
+	
+	/** 
+	 * Sets the datasource to use.
+	 * @param dataSource
+	 */
+    public void setDataSource(BasicDataSource dataSource) {
+        this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+    }
+
 	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean passes(IElement e) {
 		
-		log.warn("NOT IMPLEMENTED!");
 		
-		// TODO Implement the non-repeat element inspection.
 		
+		if(existsElement(e)){
+			log.info("The element {} exists!",e);
+			return false;
+		}
+		storeElement(e);
 		return true;
+	}
+	
+	private boolean existsElement(IElement e){
+
+		if(e.getId()==null){
+			log.warn("NULL element ID!");
+			return false;
+		}
+		StringBuffer sqlSB = new StringBuffer()
+			.append("SELECT count(0) FROM ")
+			.append(tableName)
+			.append(" WHERE ")
+			.append(this.idTableColumnName)
+			.append(" = :id ");
+		
+		String sql = sqlSB.toString();
+		
+		log.trace("Exist SQL:{}",sql);
+		
+		Map<String,String> namedParameters = Collections.singletonMap("id", e.getId().toString());
+
+		int result = this.namedParameterJdbcTemplate.queryForInt(sql, namedParameters);
+		
+		return (result!=0);
+	}
+	
+	private void storeElement(IElement e){
+		if(e.getId()==null){
+			log.warn("NULL element ID!");
+			return;
+		}
+		StringBuffer sqlSB = new StringBuffer()
+		.append("INSERT INTO ")
+		.append(tableName)
+		.append("(").append(this.idTableColumnName).append(")")
+		.append(" VALUES (:id) ");
+		
+		Map<String,String> namedParameters = Collections.singletonMap("id", e.getId().toString());
+		
+		this.namedParameterJdbcTemplate.update(sqlSB.toString(), namedParameters);
+	}
+
+	public String getTableName() {
+		return tableName;
+	}
+
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+	}
+
+	public String getIdTableColumnName() {
+		return idTableColumnName;
+	}
+
+	public void setIdTableColumnName(String idTableColumnName) {
+		this.idTableColumnName = idTableColumnName;
 	}
 
 	
