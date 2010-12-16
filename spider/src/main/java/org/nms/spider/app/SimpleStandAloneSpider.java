@@ -1,6 +1,5 @@
 package org.nms.spider.app;
 
-import org.nms.spider.beans.IElement;
 import org.nms.spider.engine.ISpider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
