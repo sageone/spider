@@ -29,6 +29,7 @@ public class ParalelProcessorHelperImpl implements IProcessorHelper{
 	 */
 	private List<IProcessorHelper> processors;
 	
+	@SuppressWarnings("rawtypes")
 	@Override
 	public List<IElement> process(List<IElement> elements) {
 		if(elements==null || elements.size()==0){

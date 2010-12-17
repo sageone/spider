@@ -1,7 +1,6 @@
 package org.nms.spider.helpers.utils;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +44,7 @@ public class LogToFileProcessor implements IProcessorHelper {
 	private boolean logElement = Boolean.FALSE;
 	
 	
+	@SuppressWarnings("rawtypes")
 	@Override
 	public List<IElement> process(List<IElement> elements) {
 		
