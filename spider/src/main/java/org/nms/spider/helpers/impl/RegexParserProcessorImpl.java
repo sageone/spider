@@ -12,12 +12,12 @@ import org.nms.spider.helpers.IProcessorHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RegexParserPreprocessorImpl implements IProcessorHelper {
+public class RegexParserProcessorImpl implements IProcessorHelper {
 
 	/**
 	 * Logger
 	 */
-	private static final Logger log = LoggerFactory.getLogger(RegexParserPreprocessorImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(RegexParserProcessorImpl.class);
 	
 	/**
 	 * Prefix for the link search.
