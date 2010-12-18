@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.nms.spider.beans.IElement;
+import org.nms.spider.helpers.AbstractProcessor;
 import org.nms.spider.helpers.IProcessorHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,9 @@ import org.slf4j.LoggerFactory;
  * @author daviz
  *
  */
-public class ParalelProcessorHelperImpl implements IProcessorHelper{
+public class ParalelProcessorHelperImpl 
+extends AbstractProcessor
+implements IProcessorHelper{
 
 	/**
 	 * The logger.
