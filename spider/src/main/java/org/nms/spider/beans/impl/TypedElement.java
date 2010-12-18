@@ -6,7 +6,7 @@ package org.nms.spider.beans.impl;
  * @author daviz
  *
  */
-public class TypedElement extends GenericElement {
+public class TypedElement extends StringElement {
 
 	private String type;
 

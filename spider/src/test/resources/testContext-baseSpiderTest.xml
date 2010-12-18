@@ -5,8 +5,9 @@
            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
            
     <!-- Initialal elementents -->       
-    <bean id="initElement1" class="org.nms.spider.beans.impl.GenericElement">
+    <bean id="initElement1" class="org.nms.spider.beans.impl.StringElement">
     	<property name="element" value="http://localhost/test/spider"/>
+    	<property name="id" value="http://localhost/test/spider"/>
     </bean>
     
     
@@ -16,6 +17,11 @@
     		<property name="processorsChain">
     			<list>
     				<bean id="logProcessorPerStep" class="org.nms.spider.helpers.utils.LogProcessorImpl"></bean>
+    				<bean id="filterProcessor" class="org.nms.spider.helpers.utils.FilterProcessorImpl">
+			    		<property name="filter">
+			    			<ref bean="nonRepeatFilter"/>
+			    		</property>
+			    	</bean>
     			</list>
     		</property>
     	
@@ -23,13 +29,13 @@
     	<bean id="urlProcessor" class="org.nms.spider.helpers.impl.UrlProcessorImpl">
     	</bean>  
   
-    	<bean id="regexProcessor1" class="org.nms.spider.helpers.impl.RegexParserPreprocessorImpl">
+    	<bean id="regexProcessor1" class="org.nms.spider.helpers.impl.RegexParserProcessorImpl">
     		<property name="prefix" value="http://localhost/test/spider/followlink" />
     		<property name="postfix" value="&quot;"></property>
     		<property name="removePostFix" value="true"></property>
     	</bean>
     
-    	<bean id="regexProcessor2" class="org.nms.spider.helpers.impl.RegexParserPreprocessorImpl">
+    	<bean id="regexProcessor2" class="org.nms.spider.helpers.impl.RegexParserProcessorImpl">
     		<property name="prefix" value="http://www.linktoshow.html" />
     		<property name="postfix" value="&quot;"></property>
     		<property name="removePostFix" value="true"></property>
@@ -59,6 +65,23 @@
     			</list>
     		</property>
     	</bean>
+    	<!-- Data Source for the test -->
+		<bean id="dataSource"
+			class="org.apache.commons.dbcp.BasicDataSource"
+			>
+			    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+			    <property name="url" value="jdbc:mysql://localhost:3306/spidertest"/>
+			    <property name="username" value="spider"/>
+			    <property name="password" value="spider"/>
+			    <!--<property name="autoCommit" value="false"/>-->
+			    <!--<property name="suppressClose" value="true"/>-->
+		</bean>
+		
+		<bean id="nonRepeatFilter" class="org.nms.spider.helpers.impl.NonRepeatFilterImpl">
+			<property name="dataSource" ref="dataSource"/>
+			<property name="tableName" value="spider_storedelements"/>
+			<property name="idTableColumnName" value="id"/>
+		</bean>
     <bean id="preprocessor" class="org.nms.spider.helpers.utils.ChainedProcessorHelperImpl">
     	<property name="processorsChain">
     		<list>
@@ -72,6 +95,7 @@
     	</property>
     	<property name="perStepChainProcessor">
     		<ref bean="preProcessorPerStepChainProcessor"/>
+
     	</property>
     </bean>
     

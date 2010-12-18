@@ -3,7 +3,10 @@
 <log4j:configuration>
 
 	<logger name="org.nms.spider">
-		<level value="DEBUG"/>
+		<level value="TRACE"/>
+	</logger>
+	<logger name="org.springframework">
+		<level value="INFO"/>
 	</logger>
 
  	<appender name="console" class="org.apache.log4j.ConsoleAppender">
@@ -13,7 +16,6 @@
 		</layout>
     </appender>
 	<root>
-		<priority value="debug"></priority>
 	  	<appender-ref ref="console"/>
 	</root>
 </log4j:configuration>

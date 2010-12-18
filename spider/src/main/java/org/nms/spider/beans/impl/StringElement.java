@@ -1,7 +1,7 @@
 package org.nms.spider.beans.impl;
 
 
-import org.nms.spider.beans.IElement;
+import org.nms.spider.beans.AbstractElement;
 
 /**
  * A Generic element using STRING as elements.
@@ -11,24 +11,16 @@ import org.nms.spider.beans.IElement;
  * @author daviz
  *
  */
-public class GenericElement implements IElement<String>{
+public class StringElement
+extends AbstractElement<String> 
+{
 
-	private String id;
 	
 	private String element;
 	
 	@Override
-	public String getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(String id){
-		this.id = id;
-	}
-	@Override
 	public boolean isequals(String id) {
-		return id.equals(this.id);
+		return id.equals(super.getId());
 	}
 
 
@@ -48,7 +40,7 @@ public class GenericElement implements IElement<String>{
 	public String toString(){
 
 		StringBuffer sb = new StringBuffer();
-		sb.append("[ID=").append(this.id).append("]")
+		sb.append("[ID=").append(super.getId()).append("]")
 			.append("[E:").append((this.element==null)?"null":this.element.toString()).append("]");
 		return sb.toString();	
 		

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.nms.spider.beans.IElement;
-import org.nms.spider.beans.impl.GenericElement;
+import org.nms.spider.beans.impl.StringElement;
 import org.nms.spider.helpers.IProcessorHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +50,7 @@ public class LogToFileProcessor implements IProcessorHelper {
 		
 		if(elements==null || elements.size()==0){
 			elements = new ArrayList<IElement>();
-			GenericElement e = new GenericElement();
+			StringElement e = new StringElement();
 			e.setId("No elements to log");
 			e.setElement("No elements to log");
 		}
