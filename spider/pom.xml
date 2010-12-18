@@ -13,6 +13,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
    
+   <!-- Database Driver -->
+   <mysql.version>5.0.5</mysql.version>
     <hibernate.core.version>3.4.0.GA</hibernate.core.version>
     <log4j.version>1.2.16</log4j.version>
     <slf4j.version>1.5.6</slf4j.version>
@@ -25,6 +27,17 @@
   </properties>
 
   <dependencies>
+  	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>${mysql.version}</version>
+	</dependency>
+    <dependency>
+	    <groupId>commons-dbcp</groupId>
+	    <artifactId>commons-dbcp</artifactId>
+	    <version>1.4</version>
+    </dependency>
+  
   	<!-- SPRING dependencies -->
   	<dependency>
   		<groupId>org.springframework</groupId>
