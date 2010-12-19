@@ -6,8 +6,8 @@
            
     <!-- Initialal elementents -->       
     <bean id="initElement1" class="org.nms.spider.beans.impl.StringElement">
-    	<property name="element" value="http://localhost/test/spider"/>
-    	<property name="id" value="http://localhost/test/spider"/>
+    	<property name="element" value="http://localhost/test/spider/site1"/>
+    	<property name="id" value="http://localhost/test/spider/site1"/>
     </bean>
     
     
@@ -30,7 +30,7 @@
     	</bean>  
   
     	<bean id="regexProcessor1" class="org.nms.spider.helpers.impl.RegexParserProcessorImpl">
-    		<property name="prefix" value="http://localhost/test/spider/followlink" />
+    		<property name="prefix" value="http://localhost/test/spider/site1/followlink" />
     		<property name="postfix" value="&quot;"></property>
     		<property name="removePostFix" value="true"></property>
     	</bean>
