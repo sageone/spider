@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+           
+           
+<!-- This file defines a TWO STEP spider with the following structure:
+
+1. A main site with links to a subsite folders (or external, if configured so)
+ A url parser obtains the site HTML content.
+ A regex filter obtain the second step url to obtain
+2. A sub-site with the elements to search for.
+ A url parser obtains the sub-site HTML contents from step 1
+ A regex filter obtains the direct download links and stores them in a FILE
+ 
+Each step controlls a NON-REPEAT filter, using a database connection and a table and column names
+configurable.
+
+The configuration needed:
+*regexPrefix STRING
+*regexPostfix STRING
+*regexPostfixRemove BOOLEAN
+*tableName STRING
+*tableColumn STRING
+
+ -->           
+           
+           
+	<!-- THE PREPROCESSING -->
+	
+	<!-- The URL processor for steps 1 and 2  -->
+	<bean id="urlProcessor" class="org.nms.spider.helpers.impl.UrlProcessorImpl">
+    </bean>
+    
+    <!-- The regexprocessor for the sub-site  -->
+    <bean id="regexProcessor" class="org.nms.spider.helpers.impl.RegexParserProcessorImpl">
+    		<property name="prefix" ref="regexPrefix"/>
+    		<property name="postfix" ref="regexPostfix"/>
+    		<property name="removePostFix" ref="regexPostfixRemove"/>
+    </bean>
+    
+    
+    
+    <!-- The multiregex processor for detecting DirectDownload links -->
+    <import resource="classpath*:regex-directdownloadurls.xml"/>
+    
+    
+    <!-- The FILTER to not repeat downloading/searching subiste -->
+    <!-- Data Source for the test -->
+		<bean id="dataSource"
+			class="org.apache.commons.dbcp.BasicDataSource">
+			    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+			    <property name="url" value="jdbc:mysql://localhost:3306/spider"/>
+			    <property name="username" value="spider"/>
+			    <property name="password" value="spider"/>
+		</bean>
+		
+		<bean id="nonRepeatFilter" class="org.nms.spider.helpers.impl.NonRepeatFilterImpl">
+			<property name="dataSource" ref="dataSource"/>
+			<property name="tableName" ref="tableName"/>
+			<property name="idTableColumnName" ref="tableColumn"/>
+		</bean>
+		<bean id="filterProcessor" class="org.nms.spider.helpers.utils.FilterProcessorImpl">
+			<property name="filter">
+				<ref bean="nonRepeatFilter"/>
+			</property>
+	   	</bean>
+		
+    <bean id="preprocessor" class="org.nms.spider.helpers.utils.ChainedProcessorHelperImpl">
+    	<property name="processorsChain">
+    		<list>
+    			<ref bean="urlProcessor"/>
+<!--    			<ref bean="regexProcessor"/>-->
+<!--    			<ref bean="filterProcessor"/>-->
+<!--    			<ref bean="urlProcessor"/>-->
+    			<ref bean="regexProcessorDD"/>
+    			<ref bean="filterProcessor"/>
+    		</list>
+    	</property>
+    </bean>
+    
+    <!-- POSTPROCESSOR CONFIGURATION -->
+    <bean id="postprocessor" class="org.nms.spider.helpers.utils.LogToFileProcessor">
+    	<property name="fileName" value="blogs_spider"></property>
+    	<property name="path" value="/home/daviz/"></property>
+    	<property name="logId" value="true"></property>
+    </bean>
+    
+    
+   
+                
+</beans>           

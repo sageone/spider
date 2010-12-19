@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+           
+    <bean id="regexDefGeneratorForDD" class="org.nms.spider.helpers.utils.RegexDefinitionGenerator">
+    	<property name="prefixList">
+    		<list>
+    			<!-- using alphabethical order for the MAIN name of the site. -->
+    			<value>http://depositfiles.com</value>
+    			<value>http://www.mediafire</value>
+    			<value>http://www.megaupload</value>
+    			<value>http://www.rapidshare</value>
+    			<value>http://www.uploading</value>
+    			<value>http://uploading</value>
+    			
+    		</list>
+    	</property>
+    	<property name="postfix" value="&quot;"></property>
+    	<property name="removePrefix" value="false"/>
+		<property name="removePostfix" value="true"/>
+    	<!--<property name="regex" value="USIGN DEFAULT"/>-->
+    </bean>       
+	
+	<bean id="regexProcessorDD" class="org.nms.spider.helpers.impl.MultipleRegexParserProcessorImpl">
+		<property name="id" value="regexProcessorDD"/>
+		<property name="regexGenerator" ref="regexDefGeneratorForDD"></property>
+	</bean>
+</beans>
+

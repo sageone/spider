@@ -8,11 +8,14 @@ import java.util.regex.Pattern;
 
 import org.nms.spider.beans.IElement;
 import org.nms.spider.beans.impl.TypedElement;
+import org.nms.spider.helpers.AbstractProcessor;
 import org.nms.spider.helpers.IProcessorHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RegexParserProcessorImpl implements IProcessorHelper {
+public class RegexParserProcessorImpl
+extends AbstractProcessor
+implements IProcessorHelper {
 
 	/**
 	 * Logger

@@ -8,4 +8,6 @@ public interface IProcessorHelper {
 
 	@SuppressWarnings("rawtypes")
 	List<IElement> process(List<IElement> elements);
+	
+	public boolean isActive();
 }

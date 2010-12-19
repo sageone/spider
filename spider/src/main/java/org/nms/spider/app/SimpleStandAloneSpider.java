@@ -1,10 +1,7 @@
 package org.nms.spider.app;
 
-import org.nms.spider.engine.ISpider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class SimpleStandAloneSpider {
 
@@ -24,13 +21,8 @@ public class SimpleStandAloneSpider {
 			System.exit(-1);
 		}
 		try{
-			// 1. Load Spring context (arg[0])
-			ISpider s;
-			ApplicationContext ctx = new ClassPathXmlApplicationContext(args[0]);
+			ContextSpiderStarter.startSingleSpiderContext(args[0]);
 			
-			s = (ISpider)ctx.getBean("spider");
-			// 2. Start SPIDER
-			s.spider();
 		}catch(Exception e){
 			log.error("Errors during execution : {}",e.getMessage());
 			log.error("Exception:",e);

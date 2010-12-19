@@ -12,11 +12,14 @@ import java.util.List;
 
 import org.nms.spider.beans.IElement;
 import org.nms.spider.beans.impl.TypedElement;
+import org.nms.spider.helpers.AbstractProcessor;
 import org.nms.spider.helpers.IProcessorHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class UrlProcessorImpl implements IProcessorHelper {
+public class UrlProcessorImpl 
+extends AbstractProcessor
+implements IProcessorHelper {
 
 	private static final Logger log = LoggerFactory.getLogger(UrlProcessorImpl.class);
 

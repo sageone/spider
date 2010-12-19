@@ -5,11 +5,11 @@
            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
            
     <!-- Initial elementents -->       
-    <bean id="initElement1" class="org.nms.spider.beans.impl.GenericElement">
+    <bean id="initElement1" class="org.nms.spider.beans.impl.StringElement">
    		<property name="element" value="http://www.fakku.net/"/>
     </bean>
    
-	<bean id="initElement2" class="org.nms.spider.beans.impl.GenericElement">
+	<bean id="initElement2" class="org.nms.spider.beans.impl.StringElement">
 		<property name="element" value="http://www.google.com/"/>
 	</bean>
    
