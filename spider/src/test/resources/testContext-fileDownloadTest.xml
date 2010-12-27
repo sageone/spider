@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+      
+    <bean id="element" class="org.nms.spider.beans.impl.StringElement">
+    	<property name="id" value="http://localhost/test/deptree.txt"></property>
+    	<property name="element" value="http://localhost/test/deptree.txt"></property>
+    </bean>     
+	<bean id="processor" class="org.nms.spider.helpers.utils.FileDownloadProcessorImpl">
+		<property name="downloadPath" value="/home/daviz/Descargas/"></property>
+		<property name="prefixFileName" value="downloaded_spider"></property>
+		<property name="fileExtension" value=".down"></property>
+		
+	</bean>
+</beans>
+
