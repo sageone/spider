@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+           
+    <!-- Initialal elementents -->       
+    <bean id="initElement1" class="org.nms.spider.beans.impl.StringElement">
+    	<property name="element" value="http://localhost/test/spider/site3/"/>
+    	<property name="id" value="http://localhost/test/spider/site3/"/>
+    </bean>
+    
+    <!-- Preprocessor definitions -->
+    
+    
+    
+    <bean id="deepProcessor" class="org.nms.spider.helpers.utils.DeepTreeProcessorHelper">
+    	<property name="deepSearchElementGeneratorProcessor" ref="urlRegexExtractor" />
+		<property name="elementProcessor" ref="urlProcessor"></property>    	
+    </bean>
+    <bean id="urlProcessor" class="org.nms.spider.helpers.impl.UrlProcessorImpl">
+    </bean>
+    <bean id="urlRegexExtractor" class="org.nms.spider.helpers.impl.RegexParserProcessorImpl">
+					<property name="prefix" value="http://localhost/test/spider/site3/"></property>
+					<property name="postfix" value="&quot;"/>
+					<property name="removePostFix" value="true"></property>
+	</bean>  
+    
+    
+</beans>    
