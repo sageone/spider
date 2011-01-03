@@ -1,5 +1,6 @@
 package org.nms.spider.helpers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.nms.spider.beans.IElement;
@@ -57,5 +58,23 @@ public abstract class AbstractProcessor implements IIdentificable<String>,
 
 	@SuppressWarnings("rawtypes")
 	public abstract List<IElement> process(List<IElement> elements);
+
+	/**
+	 * An implementation for a single element process method, using the list
+	 * abstract one.
+	 * 
+	 * @param e
+	 *            The element to process
+	 * @return The result of processing the element as a 1-element list.
+	 */
+	@SuppressWarnings("rawtypes")
+	public List<IElement> process(IElement e) {
+
+		List<IElement> elements = new ArrayList<IElement>();
+
+		elements.add(e);
+
+		return process(elements);
+	}
 
 }
