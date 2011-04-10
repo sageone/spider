@@ -94,12 +94,18 @@ public class FileDownloadProcessorImpl extends AbstractProcessor {
 
 		// Connect and retrieve the input stream
 		URL url = new URL(urlString);
+
 		URLConnection connection = url.openConnection();
+		connection.setAllowUserInteraction(false);         
+		connection.setDoOutput(true);
+		connection.addRequestProperty("User-Agent", 
+		    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 		InputStream in = connection.getInputStream();
 
 		// Obtain the file name
 		// log.debug("Content-Disposition : {} ",
 		// connection.getHeaderField("Content-Disposition"));
+
 		// log.debug("URL FILE", url.getFile());
 
 		// Process the readed bytes and write to the output buffer stream

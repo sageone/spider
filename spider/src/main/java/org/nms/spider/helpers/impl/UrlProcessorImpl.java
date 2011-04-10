@@ -7,7 +7,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.CharBuffer;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.nms.spider.beans.IElement;
 import org.nms.spider.beans.impl.TypedElement;
@@ -40,11 +42,26 @@ public class UrlProcessorImpl extends AbstractProcessor implements
 			try {
 				URL url = new URL(urlString);
 				URLConnection connection = url.openConnection();
+				// [DBG]
+				Set<String> keys = connection.getRequestProperties().keySet();
+				for(String key : keys){
+					log.debug("Key {} value {} " , key, connection.getRequestProperties().get(key));
+				}
+				// [ENDDBG]
+				
+				
+				connection.setAllowUserInteraction(false);         
+				connection.setDoOutput(true);
+				connection.addRequestProperty("User-Agent", 
+				    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+
+				
 				if ((connection.getContentType() != null)
 						&& !connection.getContentType().toLowerCase()
 								.startsWith("text/")) {
 
 				}
+				
 				InputStream is = connection.getInputStream();
 				Reader r = new InputStreamReader(is);
 				CharBuffer cbuff = CharBuffer.allocate(1000);
