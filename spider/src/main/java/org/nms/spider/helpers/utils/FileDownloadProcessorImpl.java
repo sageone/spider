@@ -7,9 +7,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.FileNameMap;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
+import java.util.Map;
 
 import org.nms.spider.beans.IElement;
 import org.nms.spider.helpers.AbstractProcessor;
@@ -29,6 +31,8 @@ import org.slf4j.LoggerFactory;
  */
 public class FileDownloadProcessorImpl extends AbstractProcessor {
 
+	
+	public final static String HEADER_CONTENTDISPOSITION = "Content-Disposition";
 	/**
 	 * The logger.
 	 */
@@ -49,12 +53,17 @@ public class FileDownloadProcessorImpl extends AbstractProcessor {
 	 */
 	private String fileExtension = "";
 
+	/**
+	 * The user agent. Default : mozilla 4
+	 */
+	private String userAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)";
+	
 	@SuppressWarnings("rawtypes")
 	@Override
 	public List<IElement> process(List<IElement> elements) {
 		for (IElement e : elements) {
 			try {
-				FileDownloadProcessorImpl.downloadUrl(
+				this.downloadUrl(
 						e.getElement().toString(), generateFileName());
 			} catch (IOException ioe) {
 				log.error("Error downloading file {}", e.getElement()
@@ -89,7 +98,7 @@ public class FileDownloadProcessorImpl extends AbstractProcessor {
 	 *            The file name with path info.
 	 * @throws IOException
 	 */
-	private final static void downloadUrl(String urlString, String fileName)
+	public void downloadUrl(String urlString, String fileName)
 			throws IOException {
 
 		// Connect and retrieve the input stream
@@ -99,15 +108,17 @@ public class FileDownloadProcessorImpl extends AbstractProcessor {
 		connection.setAllowUserInteraction(false);         
 		connection.setDoOutput(true);
 		connection.addRequestProperty("User-Agent", 
-		    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+		    userAgent);
 		InputStream in = connection.getInputStream();
 
-		// Obtain the file name
-		// log.debug("Content-Disposition : {} ",
-		// connection.getHeaderField("Content-Disposition"));
-
-		// log.debug("URL FILE", url.getFile());
-
+		Map<String,List<String>> headers = connection.getHeaderFields();
+		
+		
+		// Obtain the file name from headers
+		String headerFileName = this.getHeaderFilename(headers);
+		if(headerFileName!=null && !"".equals(headerFileName)){
+			fileName = this.getDownloadPath() + headerFileName;
+		}
 		// Process the readed bytes and write to the output buffer stream
 		ByteArrayOutputStream tmpOut = new ByteArrayOutputStream();
 
@@ -151,4 +162,64 @@ public class FileDownloadProcessorImpl extends AbstractProcessor {
 	public void setFileExtension(String fileExtension) {
 		this.fileExtension = fileExtension;
 	}
+	
+	public String getHeaderFilename(Map<String,List<String>> headers ){
+		String result = null;
+		
+		//[DBG]
+//		for(String key :headers.keySet()){
+//			log.debug("HEADER KEY {}",key);
+//			for(String header:headers.get(key)){
+//				log.debug("[{}] - [{}]",key,header);
+//				
+//			}
+//			
+//		}
+//		
+//		log.debug("GETFILE : {}" ,url.getFile());
+		//[ENDDBG]
+		
+		try{
+			
+			// Obtain the header value list
+			List<String> contentDispositionHeaderListValues = headers.get(FileDownloadProcessorImpl.HEADER_CONTENTDISPOSITION);
+
+			// If has value
+			if(contentDispositionHeaderListValues!=null && !contentDispositionHeaderListValues.isEmpty()){
+				// Get the first value in the list
+				String headerValue = contentDispositionHeaderListValues.get(0);
+				
+				// Parse the filename
+				int end = headerValue.length()-1;
+				int start = headerValue.lastIndexOf("=") + 2;
+				
+				log.debug("Substring of {} range [ {} ] ",headerValue, start + "-" + end);
+				
+				result = headerValue.substring(start,end);
+				
+			}else{
+				log.warn("No Content-Disposition header found. Can't obtain the filename!");
+			}
+		}catch(Exception e){
+			log.warn("Error obtaining content-disposition filename",e);
+		}
+		return result;
+	}
+
+	public String getUserAgent() {
+		return userAgent;
+	}
+
+	public void setUserAgent(String userAgent) {
+		this.userAgent = userAgent;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
