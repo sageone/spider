@@ -24,6 +24,14 @@ public class UrlProcessorImpl extends AbstractProcessor implements
 	private static final Logger log = LoggerFactory
 			.getLogger(UrlProcessorImpl.class);
 
+	/**
+	 * User agent for url connection.
+	 * <p>
+	 * Default : Mozilla/4.0.
+	 * </p>
+	 */
+	private String userAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)";
+	
 	@SuppressWarnings("rawtypes")
 	@Override
 	public List<IElement> process(List<IElement> elements) {
@@ -53,7 +61,7 @@ public class UrlProcessorImpl extends AbstractProcessor implements
 				connection.setAllowUserInteraction(false);         
 				connection.setDoOutput(true);
 				connection.addRequestProperty("User-Agent", 
-				    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+				    userAgent);
 
 				
 				if ((connection.getContentType() != null)
@@ -88,6 +96,14 @@ public class UrlProcessorImpl extends AbstractProcessor implements
 		}
 
 		return result;
+	}
+
+	public String getUserAgent() {
+		return userAgent;
+	}
+
+	public void setUserAgent(String userAgent) {
+		this.userAgent = userAgent;
 	}
 
 }
