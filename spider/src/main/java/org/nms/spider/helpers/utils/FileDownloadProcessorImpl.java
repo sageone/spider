@@ -166,18 +166,16 @@ public class FileDownloadProcessorImpl extends AbstractProcessor {
 	public String getHeaderFilename(Map<String,List<String>> headers ){
 		String result = null;
 		
-		//[DBG]
-//		for(String key :headers.keySet()){
-//			log.debug("HEADER KEY {}",key);
-//			for(String header:headers.get(key)){
-//				log.debug("[{}] - [{}]",key,header);
-//				
-//			}
-//			
-//		}
-//		
-//		log.debug("GETFILE : {}" ,url.getFile());
-		//[ENDDBG]
+		//[DBG] Tracing logs 
+		for(String key :headers.keySet()){
+			log.trace("HEADER KEY {}",key);
+			for(String header:headers.get(key)){
+				log.trace("[{}] - [{}]",key,header);
+				
+			}
+			
+		}
+		//[ENDDBG] Tracing logs
 		
 		try{
 			
