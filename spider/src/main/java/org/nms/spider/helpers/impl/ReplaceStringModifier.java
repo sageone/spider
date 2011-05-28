@@ -36,6 +36,7 @@ public class ReplaceStringModifier implements IElementModifier {
 		}
 		e.setElement(e.getElement().toString().replaceAll(toReplace,replacer));
 		
+		log.debug("Replacing [{}] : result [{}]",replacer+"/"+toReplace,e.getElement().toString());
 		return e;
 	}
 
