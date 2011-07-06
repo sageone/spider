@@ -44,7 +44,7 @@ public class ThreadedStandAloneMultipleSpider {
 
 			}
 
-			// Waith for all threads to release the semaphore.
+			// Wait for all threads to release the semaphore.
 			s.acquire(args.length);
 			
 		} catch (Exception e) {
