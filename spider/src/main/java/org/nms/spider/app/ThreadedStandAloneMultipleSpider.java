@@ -8,7 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Creates a Thead for each xml spider file configuration, and launches all threads to spider the elements.
+ * Creates a Thread for each xml spider file configuration.
+ * Launches all threads to spider the elements, waits on the
+ * semaphore until all threads has released it.
  * 
  * @author daviz
  *
