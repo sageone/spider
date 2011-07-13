@@ -13,9 +13,11 @@
     			<value>http://easy-share.com</value>
     			<value>http://filefactory.com</value>
     			<value>http://www.filesonic.com/</value>
+    			<value>http://freakshare.com/files/</value>
     			<value>http://www.gigasize.com</value>
     			<value>http://hotfile.com/dl</value>
     			<value>http://www.mediafire</value>
+    			<value>http://www.megaporn.com</value>
     			<value>http://www.megaupload</value>
     			<value>http://mir.cr</value>
     			<value>http://www.rapidshare</value>
@@ -23,8 +25,9 @@
     			<value>http://www.uploading</value>
     			<value>http://uploading</value>
     			<value>http://uploadmirrors</value>
+    			<value>http://www.uploadstation.com</value>
     			<value>http://www.sendspace.com</value>
-    			
+
     		</list>
     	</property>
     	<property name="postfix" value="&quot;"></property>
