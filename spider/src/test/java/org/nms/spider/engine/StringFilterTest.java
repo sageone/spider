@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.nms.spider.beans.IElement;
 import org.nms.spider.helpers.IFilter;
-import org.nms.spider.helpers.IProcessorHelper;
+import org.nms.spider.helpers.IProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -21,7 +21,7 @@ public class StringFilterTest {
 	 * The filter to test.
 	 */
 	@Autowired
-	public IProcessorHelper filter;
+	public IProcessor filter;
 	
 	/**
 	 * Elements to filter.

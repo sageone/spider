@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.nms.spider.beans.IElement;
 import org.nms.spider.helpers.IFilter;
-import org.nms.spider.helpers.IProcessorHelper;
+import org.nms.spider.helpers.IProcessor;
 import org.nms.spider.helpers.impl.NonRepeatFilterImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;

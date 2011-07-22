@@ -7,19 +7,29 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.CharBuffer;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import org.nms.spider.beans.IElement;
 import org.nms.spider.beans.impl.TypedElement;
 import org.nms.spider.helpers.AbstractProcessor;
-import org.nms.spider.helpers.IProcessorHelper;
+import org.nms.spider.helpers.IProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class UrlProcessorImpl extends AbstractProcessor implements
-		IProcessorHelper {
+/**
+ * Url processor for String based elements.
+ * <p>
+ * The element must contain the URL to process.
+ * </p>
+ * <p>
+ * Configurable user agent and connection time out.
+ * </p>
+ * @author daviz
+ *
+ */
+public class UrlProcessorImpl extends AbstractProcessor<String,String>  implements
+		IProcessor<String,String>{
 
 	private static final Logger log = LoggerFactory
 			.getLogger(UrlProcessorImpl.class);
@@ -32,14 +42,18 @@ public class UrlProcessorImpl extends AbstractProcessor implements
 	 */
 	private String userAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)";
 	
-	@SuppressWarnings("rawtypes")
+	/**
+	 * Connection time out. Default 10sec (10000 ms).
+	 */
+	private int timeOut = 10000;
+	
 	@Override
-	public List<IElement> process(List<IElement> elements) {
-		ArrayList<IElement> result = new ArrayList<IElement>();
+	public List<IElement<String>> process(IElement<String> element) {
+		ArrayList<IElement<String>> result = new ArrayList<IElement<String>>();
 
-		for (IElement el : elements) {
+		if(element!=null) {
 
-			String urlString = (String) el.getElement();
+			String urlString = element.getElement();
 
 			log.info("Preprocessing url : " + urlString);
 
@@ -58,7 +72,8 @@ public class UrlProcessorImpl extends AbstractProcessor implements
 				// [ENDDBG]
 				
 				
-				connection.setAllowUserInteraction(false);         
+				connection.setAllowUserInteraction(false); 
+				connection.setConnectTimeout(timeOut);
 				connection.setDoOutput(true);
 				connection.addRequestProperty("User-Agent", 
 				    userAgent);
@@ -104,6 +119,20 @@ public class UrlProcessorImpl extends AbstractProcessor implements
 
 	public void setUserAgent(String userAgent) {
 		this.userAgent = userAgent;
+	}
+
+	/**
+	 * @return the timeOut
+	 */
+	public int getTimeOut() {
+		return timeOut;
+	}
+
+	/**
+	 * @param timeOut the timeOut to set
+	 */
+	public void setTimeOut(int timeOut) {
+		this.timeOut = timeOut;
 	}
 
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import org.nms.spider.beans.IElement;
 import org.nms.spider.beans.impl.RegexDefinition;
 import org.nms.spider.helpers.AbstractProcessor;
-import org.nms.spider.helpers.IProcessorHelper;
+import org.nms.spider.helpers.IProcessor;
 import org.nms.spider.helpers.utils.RegexDefinitionGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 public class MultipleRegexParserProcessorImpl 
 extends AbstractProcessor
-implements IProcessorHelper {
+implements IProcessor {
 
 	/**
 	 * The logger.

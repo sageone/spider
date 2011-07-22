@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.nms.spider.beans.IElement;
 import org.nms.spider.engine.ISpider;
-import org.nms.spider.helpers.IProcessorHelper;
+import org.nms.spider.helpers.IProcessor;
 
 /**
  * Abstract Spider class implementation.
@@ -23,12 +23,12 @@ public abstract class AbstractSpider implements ISpider{
 	/**
 	 * The preprocessor for the spider engine.
 	 */
-	private IProcessorHelper preprocessor;
+	private IProcessor preprocessor;
 	
 	/**
 	 * The postprocessor for the spider engine.
 	 */
-	private IProcessorHelper postprocessor;
+	private IProcessor postprocessor;
 	
 	
 	private String name;
@@ -43,20 +43,20 @@ public abstract class AbstractSpider implements ISpider{
 		this.initialSet = initialSet;
 	}
 
-	public IProcessorHelper getPostprocessor() {
+	public IProcessor getPostprocessor() {
 		return postprocessor;
 	}
 
-	public void setPostprocessor(IProcessorHelper postprocessor) {
+	public void setPostprocessor(IProcessor postprocessor) {
 		this.postprocessor = postprocessor;
 	}
 
 
-	public void setPreprocessor(IProcessorHelper preprocessor) {
+	public void setPreprocessor(IProcessor preprocessor) {
 		this.preprocessor = preprocessor;
 	}
 
-	public IProcessorHelper getPreprocessor() {
+	public IProcessor getPreprocessor() {
 		return preprocessor;
 	}
 

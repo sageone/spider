@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.nms.spider.beans.IElement;
 import org.nms.spider.helpers.AbstractProcessor;
-import org.nms.spider.helpers.IProcessorHelper;
+import org.nms.spider.helpers.IProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
@@ -16,21 +16,21 @@ import org.slf4j.LoggerFactory;
  */
 public class ChainedProcessorHelperImpl 
 extends AbstractProcessor
-implements IProcessorHelper{
+implements IProcessor{
 
 	private static final Logger log = LoggerFactory.getLogger(ChainedProcessorHelperImpl.class);
 
 	/**
 	 * The processors chain.
 	 */
-	private List<IProcessorHelper> processorsChain = new ArrayList<IProcessorHelper>();
+	private List<IProcessor> processorsChain = new ArrayList<IProcessor>();
 	
 	/**
 	 * The processors chain for each step.
 	 */
 	private ChainedProcessorHelperImpl perStepChainProcessor;
 	
-	public List<IProcessorHelper> getProcessorsChain() {
+	public List<IProcessor> getProcessorsChain() {
 		return processorsChain;
 	}
 
@@ -38,7 +38,7 @@ implements IProcessorHelper{
 	 * Sets the processors chain list.
 	 * @param processors The processors chain list. Order of the list is the order of the chain.
 	 */
-	public void setProcessorsChain(List<IProcessorHelper> processors) {
+	public void setProcessorsChain(List<IProcessor> processors) {
 		this.processorsChain = processors;
 	}
 
@@ -47,7 +47,7 @@ implements IProcessorHelper{
 	 * Adds a processor to the processing chain.
 	 * @param processor
 	 */
-	public void addProcessor(IProcessorHelper processor){
+	public void addProcessor(IProcessor processor){
 		processorsChain.add(processor);
 	}
 	
@@ -62,7 +62,7 @@ implements IProcessorHelper{
 			
 			log.info("The chain processors is of {} processors.",processorsChain.size());
 			
-			for(IProcessorHelper p:processorsChain){
+			for(IProcessor p:processorsChain){
 				
 				if(elements.size() == 0){
 					log.warn("No elements to process. Exit the process chain. Step "+ step);

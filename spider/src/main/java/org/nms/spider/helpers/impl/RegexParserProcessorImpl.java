@@ -9,13 +9,13 @@ import java.util.regex.Pattern;
 import org.nms.spider.beans.IElement;
 import org.nms.spider.beans.impl.TypedElement;
 import org.nms.spider.helpers.AbstractProcessor;
-import org.nms.spider.helpers.IProcessorHelper;
+import org.nms.spider.helpers.IProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RegexParserProcessorImpl
 extends AbstractProcessor
-implements IProcessorHelper {
+implements IProcessor {
 
 	/**
 	 * Logger
@@ -48,37 +48,6 @@ implements IProcessorHelper {
 	 */
 	private String regex = "(.*?)";
 
-	@SuppressWarnings("rawtypes")
-	@Override
-	public List<IElement> process(List<IElement> elements) {
-		
-		
-		List<IElement> result = new ArrayList<IElement>();
-		for(IElement e:elements){
-			
-			
-			
-			Pattern p = Pattern.compile(prefix+regex+postfix);
-			
-			
-			Matcher m = p.matcher(e.getElement().toString());
-			
-			while(m.find()){
-				TypedElement te = new TypedElement();
-				te.setType("htmllink");
-				
-				log.info("Found one element!");
-				String found = m.group();
-				found = processResult(found);
-				te.setId(found);
-				te.setElement(found);
-				log.info(found);
-				result.add(te);
-			}
-			
-		}
-		return result;
-	}
 
 	
 	private String processResult(String result){
@@ -131,6 +100,34 @@ implements IProcessorHelper {
 
 	public void setRegex(String regex) {
 		this.regex = regex;
+	}
+
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public List<IElement> process(IElement e) {
+		
+		List<IElement> result = new ArrayList<IElement>();
+		
+		Pattern p = Pattern.compile(prefix+regex+postfix);
+		
+		
+		Matcher m = p.matcher(e.getElement().toString());
+		
+		while(m.find()){
+			TypedElement te = new TypedElement();
+			te.setType("htmllink");
+			
+			log.info("Found one element!");
+			String found = m.group();
+			found = processResult(found);
+			te.setId(found);
+			te.setElement(found);
+			log.info(found);
+			result.add(te);
+		}
+		
+		return result;
 	}
 
 

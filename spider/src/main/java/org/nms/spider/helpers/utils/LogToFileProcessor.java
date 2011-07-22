@@ -8,7 +8,7 @@ import java.util.List;
 import org.nms.spider.beans.IElement;
 import org.nms.spider.beans.impl.StringElement;
 import org.nms.spider.helpers.AbstractProcessor;
-import org.nms.spider.helpers.IProcessorHelper;
+import org.nms.spider.helpers.IProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public class LogToFileProcessor extends AbstractProcessor implements
-		IProcessorHelper {
+		IProcessor {
 
 	/**
 	 * The logger

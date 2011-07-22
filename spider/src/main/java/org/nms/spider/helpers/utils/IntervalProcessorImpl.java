@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.nms.spider.beans.IElement;
 import org.nms.spider.helpers.AbstractProcessor;
-import org.nms.spider.helpers.IProcessorHelper;
+import org.nms.spider.helpers.IProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
  */
 public class IntervalProcessorImpl 
 extends AbstractProcessor
-implements IProcessorHelper{
+implements IProcessor{
 
 	/**
 	 * The logger.
@@ -46,9 +46,9 @@ implements IProcessorHelper{
 	/**
 	 * The processor for the elements.
 	 */
-	private IProcessorHelper processor;
+	private IProcessor processor;
 	
-	public void IntervalProcessor(IProcessorHelper processor){
+	public void IntervalProcessor(IProcessor processor){
 		
 		this.processor = processor;
 		
@@ -90,11 +90,11 @@ implements IProcessorHelper{
 		this.maxMilisPeriod = maxMilisPeriod;
 	}
 
-	public IProcessorHelper getProcessor() {
+	public IProcessor getProcessor() {
 		return processor;
 	}
 
-	public void setProcessor(IProcessorHelper processor) {
+	public void setProcessor(IProcessor processor) {
 		this.processor = processor;
 	}
 	

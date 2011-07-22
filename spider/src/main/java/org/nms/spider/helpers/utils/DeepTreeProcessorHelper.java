@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.nms.spider.beans.IElement;
 import org.nms.spider.helpers.AbstractProcessor;
-import org.nms.spider.helpers.IProcessorHelper;
+import org.nms.spider.helpers.IProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public class DeepTreeProcessorHelper extends AbstractProcessor implements
-		IProcessorHelper {
+		IProcessor {
 
 	private final static Logger log = LoggerFactory
 			.getLogger(DeepTreeProcessorHelper.class);
@@ -24,12 +24,12 @@ public class DeepTreeProcessorHelper extends AbstractProcessor implements
 	/**
 	 * The processor that generates the in-deep-search elements.
 	 */
-	private IProcessorHelper deepSearchElementGeneratorProcessor;
+	private IProcessor deepSearchElementGeneratorProcessor;
 
 	/**
 	 * The processor that obtain the elements.
 	 */
-	private IProcessorHelper elementProcessor;
+	private IProcessor elementProcessor;
 
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -66,20 +66,20 @@ public class DeepTreeProcessorHelper extends AbstractProcessor implements
 		return result;
 	}
 
-	public IProcessorHelper getElementProcessor() {
+	public IProcessor getElementProcessor() {
 		return elementProcessor;
 	}
 
-	public void setElementProcessor(IProcessorHelper elementProcessor) {
+	public void setElementProcessor(IProcessor elementProcessor) {
 		this.elementProcessor = elementProcessor;
 	}
 
-	public IProcessorHelper getDeepSearchElementGeneratorProcessor() {
+	public IProcessor getDeepSearchElementGeneratorProcessor() {
 		return deepSearchElementGeneratorProcessor;
 	}
 
 	public void setDeepSearchElementGeneratorProcessor(
-			IProcessorHelper deepSearchElementGeneratorProcessor) {
+			IProcessor deepSearchElementGeneratorProcessor) {
 		this.deepSearchElementGeneratorProcessor = deepSearchElementGeneratorProcessor;
 	}
 

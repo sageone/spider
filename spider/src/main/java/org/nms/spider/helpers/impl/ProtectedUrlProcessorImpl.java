@@ -13,13 +13,13 @@ import java.util.List;
 import org.nms.spider.beans.IElement;
 import org.nms.spider.beans.impl.TypedElement;
 import org.nms.spider.helpers.AbstractProcessor;
-import org.nms.spider.helpers.IProcessorHelper;
+import org.nms.spider.helpers.IProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ProtectedUrlProcessorImpl 
 extends AbstractProcessor
-implements IProcessorHelper {
+implements IProcessor {
 
 	private static final Logger log = LoggerFactory.getLogger(ProtectedUrlProcessorImpl.class);
 

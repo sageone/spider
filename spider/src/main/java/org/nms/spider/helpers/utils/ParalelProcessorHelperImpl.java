@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.nms.spider.beans.IElement;
 import org.nms.spider.helpers.AbstractProcessor;
-import org.nms.spider.helpers.IProcessorHelper;
+import org.nms.spider.helpers.IProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ParalelProcessorHelperImpl 
 extends AbstractProcessor
-implements IProcessorHelper{
+implements IProcessor{
 
 	/**
 	 * The logger.
@@ -30,7 +30,7 @@ implements IProcessorHelper{
 	/**
 	 * The processors.
 	 */
-	private List<IProcessorHelper> processors;
+	private List<IProcessor> processors;
 	
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -45,7 +45,7 @@ implements IProcessorHelper{
 		}
 		List<IElement> result = new ArrayList<IElement>();
 		
-		for(IProcessorHelper p:processors){
+		for(IProcessor p:processors){
 			List<IElement> pResult = p.process(elements);
 			if(pResult==null || pResult.size()==0){
 				log.info("No results for processor " + p.getClass().toString());
@@ -57,11 +57,11 @@ implements IProcessorHelper{
 		return result;
 	}
 
-	public List<IProcessorHelper> getProcessors() {
+	public List<IProcessor> getProcessors() {
 		return processors;
 	}
 
-	public void setProcessors(List<IProcessorHelper> processors) {
+	public void setProcessors(List<IProcessor> processors) {
 		this.processors = processors;
 	}
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.nms.spider.beans.IElement;
 import org.nms.spider.helpers.AbstractProcessor;
-import org.nms.spider.helpers.IProcessorHelper;
+import org.nms.spider.helpers.IProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  */
 public class LogProcessorImpl 
 extends AbstractProcessor
-implements IProcessorHelper{
+implements IProcessor{
 
 	private final static Logger log = LoggerFactory.getLogger(LogProcessorImpl.class);
 	

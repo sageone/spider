@@ -1,19 +1,47 @@
 package org.nms.spider.helpers;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.LoggerFactory;
 import org.nms.spider.beans.IElement;
 import org.nms.spider.common.IIdentificable;
 import org.nms.spider.common.INameable;
+import org.slf4j.Logger;
 
-public abstract class AbstractProcessor implements IIdentificable<String>,
-		INameable, IProcessorHelper {
+/**
+ * Abstract processor.
+ * <p>
+ * Provides a default implementation for element list processing.
+ * </p>
+ * @author daviz
+ * 
+ * <O> The origin generic type for the elements.
+ * <R> The resulting generic type for the elements.
+ *
+ */
+public abstract class AbstractProcessor<O extends Serializable,R extends Serializable> implements IIdentificable<String>,
+		INameable, IProcessor<O,R> {
 
+	/**
+	 * Log.
+	 */
+	Logger log = LoggerFactory.getLogger(AbstractProcessor.class);
+	
+	/**
+	 * The processor ID.
+	 */
 	private String id;
 
+	/**
+	 * The processor name.
+	 */
 	private String name;
 
+	/**
+	 * Flag of active processor.
+	 */
 	private boolean active = Boolean.TRUE;
 
 	public String getId() {
@@ -56,8 +84,32 @@ public abstract class AbstractProcessor implements IIdentificable<String>,
 		return sb.toString();
 	}
 
-	@SuppressWarnings("rawtypes")
-	public abstract List<IElement> process(List<IElement> elements);
+	/**
+	 * Implementation of the process list of elements.
+	 * <p>
+	 * If the processor is not active, it returns NULL.
+	 * </p>
+	 * TODO daviz Provide a way to pass the processor and do not transform elements. Must be a just transform form O to R element generic type?
+	 */
+	public List<IElement<R>> process(List<IElement<O>> elements){
+		
+		if(!active){
+			log.warn("This processor [name:{}] is not active, nothing done!",name);
+			return null;
+		}
+		List<IElement<R>> result = new ArrayList<IElement<R>>();
+		if(elements!=null && elements.size()!=0){
+			log.debug("To process : {} elements",elements.size());
+			
+			for(IElement<O> e:elements){
+				result.addAll(this.process(e));
+			}
+		}
+		
+		log.debug("Obtained {} elements",result.size());
+		
+		return result;
+	}
 
 	/**
 	 * An implementation for a single element process method, using the list
@@ -67,14 +119,5 @@ public abstract class AbstractProcessor implements IIdentificable<String>,
 	 *            The element to process
 	 * @return The result of processing the element as a 1-element list.
 	 */
-	@SuppressWarnings("rawtypes")
-	public List<IElement> process(IElement e) {
-
-		List<IElement> elements = new ArrayList<IElement>();
-
-		elements.add(e);
-
-		return process(elements);
-	}
-
+	public abstract List<IElement<R>> process(IElement<O> e);
 }
