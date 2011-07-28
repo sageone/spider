@@ -7,7 +7,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.CharBuffer;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -17,7 +16,17 @@ import org.nms.spider.helpers.AbstractProcessor;
 import org.nms.spider.helpers.IProcessorHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+/**
+ * Url processor.
+ * <p>
+ * Processes a URL and stores the HTML code in the resulting element.
+ * </p>
+ * <p>
+ * Configurable : user agent for the connection and connection time out (in ms).
+ * </p>
+ * @author daviz
+ *
+ */
 public class UrlProcessorImpl extends AbstractProcessor implements
 		IProcessorHelper {
 
@@ -31,6 +40,14 @@ public class UrlProcessorImpl extends AbstractProcessor implements
 	 * </p>
 	 */
 	private String userAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)";
+	
+	/**
+	 * Time out for a url connection. In milliseconds.
+	 * <p>
+	 * Default : 10 secs (10000 ms)
+	 * </p>
+	 */
+	private int connectionTimeOut = 10000; // 10 seconds default time out
 	
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -58,7 +75,8 @@ public class UrlProcessorImpl extends AbstractProcessor implements
 				// [ENDDBG]
 				
 				
-				connection.setAllowUserInteraction(false);         
+				connection.setAllowUserInteraction(false);    
+				connection.setReadTimeout(connectionTimeOut); 
 				connection.setDoOutput(true);
 				connection.addRequestProperty("User-Agent", 
 				    userAgent);
@@ -104,6 +122,14 @@ public class UrlProcessorImpl extends AbstractProcessor implements
 
 	public void setUserAgent(String userAgent) {
 		this.userAgent = userAgent;
+	}
+
+	public int getConnectionTimeOut() {
+		return connectionTimeOut;
+	}
+
+	public void setConnectionTimeOut(int connectionTimeOut) {
+		this.connectionTimeOut = connectionTimeOut;
 	}
 
 }
