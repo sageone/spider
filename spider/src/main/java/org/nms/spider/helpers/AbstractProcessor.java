@@ -97,11 +97,17 @@ public abstract class AbstractProcessor<O extends Serializable,R extends Seriali
 	/**
 	 * Implementation of the process list of elements.
 	 * <p>
+	 * Calls the process(e) method for each element.
+	 * </p>
+	 * <p>
 	 * If the processor is not active, it returns NULL.
 	 * </p>
 	 * TODO daviz Provide a way to pass the processor and do not transform elements. Must be a just transform form O to R element generic type?
 	 */
 	public List<IElement<R>> process(List<IElement<O>> elements){
+		
+		// Call the before method of the processor.
+		before();
 		
 		if(!active){
 			log.warn("This processor [name:{}] is not active, nothing done!",name);
@@ -117,7 +123,8 @@ public abstract class AbstractProcessor<O extends Serializable,R extends Seriali
 		}
 		
 		log.debug("Obtained {} elements",result.size());
-		
+		// Call the after method for the processor.
+		after();
 		return result;
 	}
 
@@ -130,6 +137,16 @@ public abstract class AbstractProcessor<O extends Serializable,R extends Seriali
 	 * @return The result of processing the element as a 1-element list.
 	 */
 	public abstract List<IElement<R>> process(IElement<O> e);
+	
+	/**
+	 * The before method. Will be executed BEFORE any operation in the process List method.
+	 */
+	public abstract void before();
+
+	/**
+	 * The after method. Will be executed AFTER all operations in the process List method.
+	 */
+	public abstract void after();
 	
 	/**
 	 * Obtains the origin class of the genericType O.
