@@ -3,6 +3,8 @@ package org.nms.spider.helpers.utils;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.nms.spider.beans.IElement;
@@ -95,10 +97,12 @@ public class LogToFileProcessor extends AbstractProcessor implements
 	 */
 	private String generateFileName() {
 
-		// TODO Obtain year, month and day _ GregorianCalendar gc = new
-		// GregorianCalendar();
+		String year = GregorianCalendar.getInstance().get(GregorianCalendar.YEAR)+"";
+		String month = (GregorianCalendar.getInstance().get(GregorianCalendar.MONTH) + 1)+"";
+		String day = GregorianCalendar.getInstance().get(GregorianCalendar.DAY_OF_MONTH )+ "";
+		String fileNameDate = year + month + day + "_" + System.currentTimeMillis();
 
-		return this.path + this.fileName + System.currentTimeMillis() + ".log";
+		return this.path + this.fileName + fileNameDate  + ".log";
 	}
 
 	public String getPath() {
