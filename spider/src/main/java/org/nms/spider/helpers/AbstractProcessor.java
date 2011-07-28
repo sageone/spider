@@ -25,6 +25,16 @@ public abstract class AbstractProcessor<O extends Serializable,R extends Seriali
 		INameable, IProcessor<O,R> {
 
 	/**
+	 * The origin object. Used for validation purposes.
+	 */
+	private O origin;
+	
+	/**
+	 * The resulting object. Used for validation purposes.
+	 */
+	private R result;
+	
+	/**
 	 * Log.
 	 */
 	Logger log = LoggerFactory.getLogger(AbstractProcessor.class);
@@ -120,4 +130,29 @@ public abstract class AbstractProcessor<O extends Serializable,R extends Seriali
 	 * @return The result of processing the element as a 1-element list.
 	 */
 	public abstract List<IElement<R>> process(IElement<O> e);
+	
+	/**
+	 * Obtains the origin class of the genericType O.
+	 * <p>
+	 * For validation purposes.
+	 * </p>
+	 * @return The origin Class.
+	 */
+	@SuppressWarnings("rawtypes")
+	public Class getOriginClass(){
+		return origin.getClass();
+	}
+	
+	/**
+	 * Obtains the resulting class of the genericType R.
+	 * <p>
+	 * For validation purposes.
+	 * </p>
+	 * @return The resulting Class.
+	 */
+	@SuppressWarnings("rawtypes")
+	public Class getResultClass(){
+		return result.getClass();
+	}
+	
 }
