@@ -8,7 +8,7 @@ import java.io.Serializable;
  *
  * @param <T>
  */
-public abstract class AbstractElement<T extends Serializable> 
+public abstract class AbstractStringIdentificableElement<T extends Serializable> 
 implements IElement<T> {
 	
 	/**

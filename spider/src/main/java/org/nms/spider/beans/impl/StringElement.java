@@ -1,7 +1,7 @@
 package org.nms.spider.beans.impl;
 
 
-import org.nms.spider.beans.AbstractElement;
+import org.nms.spider.beans.AbstractStringIdentificableElement;
 
 /**
  * A Generic element using STRING as elements.
@@ -12,7 +12,7 @@ import org.nms.spider.beans.AbstractElement;
  *
  */
 public class StringElement
-extends AbstractElement<String> 
+extends AbstractStringIdentificableElement<String> 
 {
 
 	
