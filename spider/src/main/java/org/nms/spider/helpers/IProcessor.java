@@ -33,5 +33,9 @@ public interface IProcessor<O extends Serializable ,R extends Serializable> {
 	 * Indicates if the processor is active.
 	 * @return
 	 */
-	public boolean isActive();
+	boolean isActive();
+	
+	Class<?> getOriginClass();
+	
+	Class<?> getResultClass();
 }

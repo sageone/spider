@@ -155,8 +155,7 @@ public abstract class AbstractProcessor<O extends Serializable,R extends Seriali
 	 * </p>
 	 * @return The origin Class.
 	 */
-	@SuppressWarnings("rawtypes")
-	public Class getOriginClass(){
+	public Class<?> getOriginClass(){
 		return origin.getClass();
 	}
 	
@@ -167,8 +166,7 @@ public abstract class AbstractProcessor<O extends Serializable,R extends Seriali
 	 * </p>
 	 * @return The resulting Class.
 	 */
-	@SuppressWarnings("rawtypes")
-	public Class getResultClass(){
+	public Class<?> getResultClass(){
 		return result.getClass();
 	}
 	
