@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.net.FileNameMap;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
@@ -83,8 +84,13 @@ public class FileDownloadProcessorImpl extends AbstractProcessor {
 	 */
 	public String generateFileName() {
 
+		String year = GregorianCalendar.getInstance().get(GregorianCalendar.YEAR)+"";
+		String month = (GregorianCalendar.getInstance().get(GregorianCalendar.MONTH) + 1)+"";
+		String day = GregorianCalendar.getInstance().get(GregorianCalendar.DAY_OF_MONTH )+ "";
+		String fileNameDate = year + month + day + "_" + System.currentTimeMillis();
+		
 		return this.downloadPath + "/" + this.getPrefixFileName()
-				+ "DOWNLOADED" + System.currentTimeMillis() + "."
+				+ "DOWNLOADED" + fileNameDate + "_" + System.currentTimeMillis() + "."
 				+ this.getFileExtension();
 	}
 
