@@ -36,9 +36,10 @@ public class ThreadedStandAloneMultipleSpider {
 		}
 		try {
 			Semaphore s = new Semaphore(args.length);
-			
+			log.info("Starting {} xml configuration files ",args.length);
 			List<Thread> threads = new ArrayList<Thread>();
 			for (String ctx : args) {
+				log.debug("Starting {} xml configuration file ",ctx);
 				RunnableSpider rs = new RunnableSpider(ctx, s);
 				Thread t = new Thread(rs,ctx);
 				t.start();
