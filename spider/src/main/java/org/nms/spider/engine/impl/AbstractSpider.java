@@ -2,9 +2,9 @@ package org.nms.spider.engine.impl;
 
 import java.util.List;
 
-import org.nms.spider.beans.IElement;
+import org.nms.anxova.process.IProcessor;
+import org.nms.anxova.process.beans.IElement;
 import org.nms.spider.engine.ISpider;
-import org.nms.spider.helpers.IProcessor;
 
 /**
  * Abstract Spider class implementation.

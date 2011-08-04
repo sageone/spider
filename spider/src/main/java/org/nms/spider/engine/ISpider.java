@@ -1,6 +1,6 @@
 package org.nms.spider.engine;
 
-import org.nms.spider.common.INameable;
+import org.nms.common.INameable;
 
 public interface ISpider extends INameable{
 	

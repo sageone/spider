@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.nms.spider.beans.IElement;
-import org.nms.spider.helpers.AbstractBaseProcessor;
-import org.nms.spider.helpers.IProcessor;
+import org.nms.anxova.process.IProcessor;
+import org.nms.anxova.process.beans.IElement;
+import org.nms.anxova.process.impl.AbstractBaseProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**

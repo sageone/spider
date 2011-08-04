@@ -24,9 +24,16 @@
     <junit.version>4.4</junit.version>
     <jmock.version>2.5.1</jmock.version>
     
+    <!-- NMS dependencies -->
+    <anxova.version>1.0</anxova.version>
   </properties>
 
   <dependencies>
+    <dependency>
+        <groupId>org.nms</groupId>
+        <artifactId>anxova</artifactId>
+        <version>${anxova.version}</version>
+    </dependency>
   	<dependency>
 	    <groupId>mysql</groupId>
 	    <artifactId>mysql-connector-java</artifactId>

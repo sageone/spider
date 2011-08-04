@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import org.nms.spider.beans.IElement;
+import org.nms.anxova.process.IProcessor;
+import org.nms.anxova.process.beans.IElement;
+import org.nms.anxova.process.impl.AbstractProcessor;
 import org.nms.spider.beans.impl.TypedElement;
-import org.nms.spider.helpers.AbstractProcessor;
-import org.nms.spider.helpers.IProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

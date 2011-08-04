@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.nms.spider.beans.IElement;
+import org.nms.anxova.process.beans.IElement;
 import org.nms.spider.helpers.utils.DeepTreeProcessorHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

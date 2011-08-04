@@ -2,6 +2,8 @@ package org.nms.spider.beans;
 
 import java.io.Serializable;
 
+import org.nms.anxova.process.beans.IElement;
+
 /**
  * Abstract Element implementation for IIdentificable
  * @author daviz

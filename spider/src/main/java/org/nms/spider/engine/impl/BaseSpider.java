@@ -2,7 +2,7 @@ package org.nms.spider.engine.impl;
 
 import java.util.List;
 
-import org.nms.spider.beans.IElement;
+import org.nms.anxova.process.beans.IElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

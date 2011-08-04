@@ -13,8 +13,8 @@ import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
 
-import org.nms.spider.beans.IElement;
-import org.nms.spider.helpers.AbstractProcessor;
+import org.nms.anxova.process.beans.IElement;
+import org.nms.anxova.process.impl.AbstractProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

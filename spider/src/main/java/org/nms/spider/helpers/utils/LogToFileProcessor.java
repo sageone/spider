@@ -5,10 +5,10 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.nms.spider.beans.IElement;
+import org.nms.anxova.process.IProcessor;
+import org.nms.anxova.process.beans.IElement;
+import org.nms.anxova.process.impl.AbstractProcessor;
 import org.nms.spider.beans.impl.StringElement;
-import org.nms.spider.helpers.AbstractProcessor;
-import org.nms.spider.helpers.IProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,7 +47,6 @@ public class LogToFileProcessor extends AbstractProcessor implements
 	 */
 	private boolean logElement = Boolean.FALSE;
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public List<IElement> process(List<IElement> elements) {
 

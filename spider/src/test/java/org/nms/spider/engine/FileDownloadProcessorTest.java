@@ -8,7 +8,7 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.nms.spider.beans.IElement;
+import org.nms.anxova.process.beans.IElement;
 import org.nms.spider.helpers.utils.FileDownloadProcessorImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;

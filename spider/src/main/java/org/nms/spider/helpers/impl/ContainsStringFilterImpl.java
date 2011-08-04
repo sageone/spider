@@ -1,7 +1,7 @@
 package org.nms.spider.helpers.impl;
 
-import org.nms.spider.beans.IElement;
-import org.nms.spider.helpers.IFilter;
+import org.nms.anxova.filter.IFilter;
+import org.nms.anxova.process.beans.IElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
