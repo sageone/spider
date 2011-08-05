@@ -1,5 +1,6 @@
 package org.nms.spider.engine.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.nms.anxova.process.beans.IElement;
@@ -14,7 +15,7 @@ import org.slf4j.LoggerFactory;
  * @author daviz
  *
  */
-public class BaseSpider extends AbstractSpider {
+public class BaseSpider<N extends Serializable> extends AbstractSpider<N> {
 
 	private static final Logger log = LoggerFactory.getLogger(BaseSpider.class);
 	

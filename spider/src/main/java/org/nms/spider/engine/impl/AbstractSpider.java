@@ -1,5 +1,6 @@
 package org.nms.spider.engine.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.nms.anxova.process.IProcessor;
@@ -13,7 +14,7 @@ import org.nms.spider.engine.ISpider;
  * @author daviz
  *
  */
-public abstract class AbstractSpider implements ISpider{
+public abstract class AbstractSpider<N extends Serializable> implements ISpider<N>{
 	
 	/**
 	 * The initial set for the spider.
@@ -31,7 +32,7 @@ public abstract class AbstractSpider implements ISpider{
 	private IProcessor postprocessor;
 	
 	
-	private String name;
+	private N name;
 	
 	@SuppressWarnings("rawtypes")
 	public List<IElement> getInitialSet() {
@@ -60,11 +61,11 @@ public abstract class AbstractSpider implements ISpider{
 		return preprocessor;
 	}
 
-	public String getName() {
+	public N getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(N name) {
 		this.name = name;
 	}
 	
