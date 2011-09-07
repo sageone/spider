@@ -26,12 +26,21 @@ public class BaseSpider<N extends Serializable> extends AbstractSpider<N> {
 		log.info("Starting spider");
 		// 1. Preprocess elements
 		log.info("Starting preprocessing processor");
-		List<IElement> preprocessedElements = this.getPreprocessor().process(this.getInitialSet());
+		List<IElement> preprocessedElements = null;
+		if(this.getPreprocessor()!=null){
+			preprocessedElements = this.getPreprocessor().process(this.getInitialSet());
+		}else{
+			log.warn("No preprocessors found!");
+		}
 		
 		
 		// 2. PostProcess elements
 		log.info("Starting postprocessing processor");
-		this.getPostprocessor().process(preprocessedElements);
+		if(this.getPostprocessor()!=null){
+			this.getPostprocessor().process(preprocessedElements);
+		}else{
+			log.warn("No postprocessors found!");
+		}
 		
 
 		log.info("End of spider");
