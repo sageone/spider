@@ -25,14 +25,14 @@
     <jmock.version>2.5.1</jmock.version>
     
     <!-- NMS dependencies -->
-    <anxova.version>1.0</anxova.version>
+    <anxovahtml.version>1.0</anxovahtml.version>
   </properties>
 
   <dependencies>
     <dependency>
         <groupId>org.nms</groupId>
-        <artifactId>anxova</artifactId>
-        <version>${anxova.version}</version>
+        <artifactId>anxova-html</artifactId>
+        <version>${anxovahtml.version}</version>
     </dependency>
   	<dependency>
 	    <groupId>mysql</groupId>
