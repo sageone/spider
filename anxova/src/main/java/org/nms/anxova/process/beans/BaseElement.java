@@ -49,5 +49,12 @@ public class BaseElement<T extends Serializable> implements IElement<T> {
 		this.element = e;
 		
 	}
+	
+	public String toString(){
+		StringBuffer sb = new StringBuffer();
+		sb.append("Element [").append(element.toString());
+		sb.append("]");
+		return sb.toString();
+	}
 
 }
