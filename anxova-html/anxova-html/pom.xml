@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.nms</groupId>
   <artifactId>anxova-html</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0</version>
   <name>anxova-html</name>
   <description>anxova processors for html</description>
   
@@ -18,7 +18,10 @@
     <!-- TESTING dependencies versions -->
     <junit.version>4.4</junit.version>
     <jmock.version>2.5.1</jmock.version>
+    <spring.version>2.5.6.SEC02</spring.version>
     
+    <!-- Anxova -->
+    <anxova.version>1.0</anxova.version>
     
   </properties>
 
@@ -26,7 +29,7 @@
     <dependency>
           <groupId>org.nms</groupId>
 		  <artifactId>anxova</artifactId>
-		  <version>1.0</version>
+		  <version>${anxova.version}</version>
     </dependency>
     <!-- logging dependencies -->
   	<dependency>
@@ -50,7 +53,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -65,7 +68,28 @@
 	    <artifactId>jsoup</artifactId>
 	    <version>${jsoup.version}</version>
 	</dependency>
+	
+	<!-- SPRING dependencies -->
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring</artifactId>
+  		<version>${spring.version}</version>
+  		<scope>test</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-test</artifactId>
+  		<version>${spring.version}</version>
+  		<scope>test</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-context-support</artifactId>
+  		<version>${spring.version}</version>
+  		<scope>test</scope>
+  	</dependency>
   </dependencies>
+  
   
   <build>
   	<plugins>

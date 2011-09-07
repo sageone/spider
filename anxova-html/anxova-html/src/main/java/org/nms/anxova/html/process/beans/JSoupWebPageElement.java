@@ -39,5 +39,9 @@ public class JSoupWebPageElement implements Serializable{
 		this.element = element;
 	}
 	
+	public String toString(){
+		return element.toString();
+	}
+	
 	
 }

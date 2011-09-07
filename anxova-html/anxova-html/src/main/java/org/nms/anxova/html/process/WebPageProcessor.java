@@ -41,6 +41,7 @@ public class WebPageProcessor extends AbstractBaseProcessor<String, JSoupWebPage
 		if(e!=null && e.getElement()!=null){
 			String urlString = e.getElement();
 			try {
+				log.debug("Obtaining {} with timeout {}.",urlString,timeOut);
 				Document doc = Jsoup.connect(urlString).timeout(timeOut).get();
 				
 				// Create resulting element.

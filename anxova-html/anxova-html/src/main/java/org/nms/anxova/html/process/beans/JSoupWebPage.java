@@ -73,5 +73,9 @@ public class JSoupWebPage implements Serializable{
 		this.document = document;
 	}
 	
+	public String toString(){
+		return (document!=null)?document.toString():"null";
+	}
+	
 
 }
