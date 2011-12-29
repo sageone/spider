@@ -1,6 +1,6 @@
-package org.nms.common.impl;
+package es.org.nms.common.impl;
 
-import org.nms.common.INameable;
+import es.org.nms.common.INameable;
 
 public class StringNameable implements INameable<String>{
 

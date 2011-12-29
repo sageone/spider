@@ -1,6 +1,6 @@
-package org.nms.common.impl;
+package es.org.nms.common.impl;
 
-import org.nms.common.IIdentificable;
+import es.org.nms.common.IIdentificable;
 
 public class StringIdentificable implements IIdentificable<String>{
 

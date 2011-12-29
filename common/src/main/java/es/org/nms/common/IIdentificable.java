@@ -1,4 +1,4 @@
-package org.nms.common;
+package es.org.nms.common;
 
 /**
  * Defines a identificable interface to compare to elements.

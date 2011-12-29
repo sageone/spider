@@ -1,4 +1,4 @@
-package org.nms.common;
+package es.org.nms.common;
 
 import java.io.Serializable;
 
